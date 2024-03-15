@@ -1,4 +1,5 @@
-import { Pressable, Text, View, StyleSheet } from "react-native";
+import { Pressable, View, StyleSheet } from "react-native";
+import Text from "./Text";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import FormikTextInput from "./FormikTextInput";
@@ -14,10 +15,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#0165d4",
     padding: 10,
     borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    textAlign: "center",
   },
 });
 
@@ -55,7 +52,9 @@ const SignIn = () => {
         placeholder="Password"
       />
       <Pressable onPress={formik.handleSubmit} style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>Sign In</Text>
+        <Text color={"textSecondary"} style={{ textAlign: "center" }}>
+          Sign In
+        </Text>
       </Pressable>
     </View>
   );

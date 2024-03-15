@@ -1,4 +1,5 @@
-import { TextInput, Text, StyleSheet } from "react-native";
+import { TextInput, StyleSheet } from "react-native";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   textInput: {
@@ -13,7 +14,6 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     marginTop: -5,
     marginBottom: 5,
-    color: "#d73a4a",
   },
 });
 
@@ -30,7 +30,9 @@ const FormikTextInput = ({ formik, inputName, ...props }) => {
         {...props}
       />
       {formik.touched[inputName] && formik.errors[inputName] && (
-        <Text style={styles.errorText}>{formik.errors[inputName]}</Text>
+        <Text color={"invalid"} style={styles.errorText}>
+          {formik.errors[inputName]}
+        </Text>
       )}
     </>
   );

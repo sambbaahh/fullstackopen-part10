@@ -1,15 +1,12 @@
-import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
+import { View, StyleSheet, Pressable, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { Link } from "react-router-native";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#24292e",
-  },
-  text: {
-    color: "white",
-    fontSize: 20,
   },
   scrollView: {
     display: "flex",
@@ -24,7 +21,9 @@ const styles = StyleSheet.create({
 const AppBarTab = (props) => (
   <Pressable>
     <Link to={props.route}>
-      <Text style={styles.text}>{props.title}</Text>
+      <Text color="textSecondary" style={{ fontSize: 20 }}>
+        {props.title}
+      </Text>
     </Link>
   </Pressable>
 );
