@@ -1,5 +1,5 @@
 import { Pressable, View, StyleSheet } from "react-native";
-import { useFormik } from "formik";
+import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-native";
 
@@ -31,13 +31,38 @@ const validationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
 });
 
+export const SignInContainer = ({ onSubmit }) => {
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  return (
+    <FormikProvider value={formik}>
+      <View style={styles.container}>
+        <FormikTextInput name="username" placeholder="Username" />
+        <FormikTextInput
+          name="password"
+          placeholder="Password"
+          secureTextEntry
+        />
+        <Pressable onPress={formik.handleSubmit} style={styles.buttonContainer}>
+          <Text color={"textSecondary"} style={{ textAlign: "center" }}>
+            Sign In
+          </Text>
+        </Pressable>
+      </View>
+    </FormikProvider>
+  );
+};
+
 const SignIn = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-
     try {
       await signIn({ username, password });
       navigate("/");
@@ -46,32 +71,7 @@ const SignIn = () => {
     }
   };
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
-
-  return (
-    <View style={styles.container}>
-      <FormikTextInput
-        formik={formik}
-        inputName={"username"}
-        placeholder="Username"
-      />
-      <FormikTextInput
-        formik={formik}
-        inputName={"password"}
-        placeholder="Password"
-        secureTextEntry
-      />
-      <Pressable onPress={formik.handleSubmit} style={styles.buttonContainer}>
-        <Text color={"textSecondary"} style={{ textAlign: "center" }}>
-          Sign In
-        </Text>
-      </Pressable>
-    </View>
-  );
+  return <SignInContainer onSubmit={onSubmit} />;
 };
 
 export default SignIn;

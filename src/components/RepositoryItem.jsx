@@ -1,5 +1,6 @@
 import { View, StyleSheet, Image } from "react-native";
 import Text from "./Text";
+import formatLargeCounts from "../utils/formatLargeCounts";
 
 const styles = StyleSheet.create({
   container: {
@@ -45,14 +46,6 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = (props) => {
-  const formatLargeCounts = (count) => {
-    if (count > 999) {
-      return Math.sign(count) * (Math.abs(count) / 1000).toFixed(1) + "k";
-    } else {
-      return count;
-    }
-  };
-
   return (
     <View style={styles.container} testID="repositoryItem">
       <View style={styles.definitionContainer}>
