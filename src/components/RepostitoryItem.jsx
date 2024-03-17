@@ -54,7 +54,7 @@ const RepositoryItem = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <View style={styles.definitionContainer}>
         <Image
           style={styles.image}

@@ -37,7 +37,6 @@ const AppBar = () => {
   const handleSignOut = async () => {
     try {
       await signOut();
-      console.log("pöö");
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +54,7 @@ const AppBar = () => {
         scrollEnabled
       >
         <AppBarTab title={"Repositories"} route={"/"} />
-        {data.me ? (
+        {data?.me ? (
           <AppBarTab
             title={"Sign out"}
             route={"/sign-in"}
