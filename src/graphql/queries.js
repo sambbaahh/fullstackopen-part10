@@ -14,6 +14,30 @@ export const GET_REPOSITORIES = gql`
   ${REPOSITORY_DETAILS}
 `;
 
+export const GET_SINGLE_REPOSITORY = gql`
+  query Repository($id: ID!) {
+    repository(id: $id) {
+      ...repositoryDetails
+      url
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+  ${REPOSITORY_DETAILS}
+`;
+
 export const ME = gql`
   {
     me {

@@ -1,4 +1,6 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Pressable } from "react-native";
+import * as Linking from "expo-linking";
+
 import Text from "./Text";
 import formatLargeCounts from "../utils/formatLargeCounts";
 
@@ -42,6 +44,12 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     gap: 5,
+  },
+  linkButton: {
+    backgroundColor: "#0764d1",
+    padding: 10,
+    textAlign: "center",
+    borderRadius: 5,
   },
 });
 
@@ -89,6 +97,17 @@ const RepositoryItem = (props) => {
           <Text>Rating</Text>
         </View>
       </View>
+      {props.url && (
+        <Pressable onPress={() => Linking.openURL(props.url)}>
+          <Text
+            color={"textSecondary"}
+            style={styles.linkButton}
+            fontSize={"subheading"}
+          >
+            Open in GitHub
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 };
