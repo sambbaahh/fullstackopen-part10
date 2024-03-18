@@ -64,7 +64,10 @@ const AppBar = () => {
             />
           </>
         ) : (
-          <AppBarTab title={"Sign in"} route={"/sign-in"} />
+          <>
+            <AppBarTab title={"Sign in"} route={"/sign-in"} />
+            <AppBarTab title={"Sign up"} route={"/sign-up"} />
+          </>
         )}
       </ScrollView>
     </View>
