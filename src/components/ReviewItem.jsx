@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    gap: 5,
+    gap: 2.5,
     flexShrink: 1,
   },
   roundedText: {

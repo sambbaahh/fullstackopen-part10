@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const FormikTextInput = ({ ...props }) => {
+const FormikTextInput = (props) => {
   const [field, meta, helpers] = useField(props.name);
   return (
     <>

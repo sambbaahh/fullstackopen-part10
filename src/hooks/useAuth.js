@@ -6,7 +6,7 @@ const useSignIn = () => {
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
-  const [mutate, result] = useMutation(AUTHENTICATE);
+  const [mutate] = useMutation(AUTHENTICATE);
 
   const signIn = async ({ username, password }) => {
     const result = await mutate({
@@ -22,7 +22,7 @@ const useSignIn = () => {
     apolloClient.resetStore();
   };
 
-  return { signIn, signOut, result };
+  return { signIn, signOut };
 };
 
 export default useSignIn;

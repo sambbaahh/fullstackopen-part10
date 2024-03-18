@@ -12,6 +12,7 @@ const SingleRepository = () => {
 
   const { loading, data } = useQuery(GET_SINGLE_REPOSITORY, {
     variables: { id },
+    fetchPolicy: "cache-and-network",
   });
 
   if (loading || !data) {
