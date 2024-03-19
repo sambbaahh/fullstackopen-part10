@@ -4,7 +4,7 @@ import { Link } from "react-router-native";
 import { useQuery } from "@apollo/client";
 
 import Text from "./Text";
-import { ME } from "../graphql/queries";
+import { GET_CURRENT_USER } from "../graphql/queries";
 import useAuth from "../hooks/useAuth";
 
 const styles = StyleSheet.create({
@@ -17,21 +17,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 20,
     paddingHorizontal: 15,
-    gap: 15,
+    gap: 20,
     flexGrow: 1,
   },
 });
 
 const AppBarTab = (props) => (
   <Link to={props.route} onPress={props.onPress}>
-    <Text color="textSecondary" style={{ fontSize: 20 }}>
+    <Text color="textSecondary" fontSize={"subheading"}>
       {props.title}
     </Text>
   </Link>
 );
 
 const AppBar = () => {
-  const { loading, data } = useQuery(ME);
+  const { loading, data } = useQuery(GET_CURRENT_USER);
   const { signOut } = useAuth();
 
   const handleSignOut = async () => {
@@ -57,6 +57,7 @@ const AppBar = () => {
         {data?.me ? (
           <>
             <AppBarTab title={"Create a review"} route={"/review"} />
+            <AppBarTab title={"My reviews"} route={"/my-reviews"} />
             <AppBarTab
               title={"Sign out"}
               route={"/sign-in"}

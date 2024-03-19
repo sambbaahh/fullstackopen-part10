@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import RepositoryItem from "./RepositoryItem";
 import ReviewItem from "./ReviewItem";
 import { GET_SINGLE_REPOSITORY } from "../graphql/queries";
-import { ItemSeparator } from "./RepostitoryList";
+import { ItemSeparator } from "./ItemSeparator";
 
 const SingleRepository = () => {
   const { id } = useParams();
@@ -26,7 +26,9 @@ const SingleRepository = () => {
   return (
     <FlatList
       data={reviewNodes}
-      renderItem={({ item }) => <ReviewItem {...item} />}
+      renderItem={({ item: { user, ...rest } }) => (
+        <ReviewItem title={user.username} {...rest} />
+      )}
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => (
         <>

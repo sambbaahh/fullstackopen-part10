@@ -33,21 +33,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const ReviewItem = (props) => {
-  console.log(props);
+const ReviewItem = ({ rating, title, createdAt, text }) => {
   return (
     <View style={styles.container}>
       <View style={styles.ratingContainer}>
-        <Text style={styles.roundedText}>{props.rating}</Text>
+        <Text style={styles.roundedText}>{rating}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <Text fontSize={"subheading"} fontWeight={"bold"}>
-          {props.user.username}
+          {title}
         </Text>
         <Text fontSize={"subheading"}>
-          {format(new Date(props.createdAt), "dd.MM.yyyy")}
+          {format(new Date(createdAt), "dd.MM.yyyy")}
         </Text>
-        <Text fontSize={"subheading"}>{props.text}</Text>
+        <Text fontSize={"subheading"}>{text}</Text>
       </View>
     </View>
   );
