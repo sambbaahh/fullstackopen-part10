@@ -8,6 +8,7 @@ import { ItemSeparator } from "./ItemSeparator";
 const MyReviews = () => {
   const { loading, data } = useQuery(GET_CURRENT_USER, {
     variables: { includeReviews: true },
+    fetchPolicy: "cache-and-network",
   });
 
   if (loading || !data) {
@@ -15,16 +16,21 @@ const MyReviews = () => {
   }
 
   const items = data.me.reviews.edges.map((edge) => edge.node);
+
   return (
     <FlatList
       data={items}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item: { repository, ...rest }, index }) => (
+      renderItem={({ item }, index) => (
         <ReviewItem
           key={index}
-          title={repository.fullName}
-          {...repository}
-          {...rest}
+          rating={item.rating}
+          createdAt={item.createdAt}
+          text={item.text}
+          reviewId={item.id}
+          title={item.repository.fullName}
+          repoId={item.repository.id}
+          isMyReviews={true}
         />
       )}
     />
