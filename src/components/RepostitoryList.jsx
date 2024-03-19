@@ -1,15 +1,22 @@
-import { FlatList, View, StyleSheet, Pressable } from "react-native";
+import { FlatList, View, StyleSheet, Pressable, TextInput } from "react-native";
 import { useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-native";
+import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 import RepositoryItem from "./RepositoryItem";
 import { GET_REPOSITORIES } from "../graphql/queries";
 import { Picker } from "@react-native-picker/picker";
-import { useState } from "react";
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
+  },
+  searchBar: {
+    backgroundColor: "white",
+    height: 50,
+    padding: 10,
+    margin: 10,
   },
 });
 
@@ -25,6 +32,7 @@ const SortPicker = (props) => (
     <Picker.Item
       label="Latest repositories"
       value={JSON.stringify({ orderBy: "CREATED_AT", orderDirection: "DESC" })}
+      style={{ color: "black" }}
     ></Picker.Item>
     <Picker.Item
       label="Highest rated repositories"
@@ -32,6 +40,7 @@ const SortPicker = (props) => (
         orderBy: "RATING_AVERAGE",
         orderDirection: "DESC",
       })}
+      style={{ color: "black" }}
     ></Picker.Item>
     <Picker.Item
       label="Lowest rated repositories"
@@ -39,6 +48,7 @@ const SortPicker = (props) => (
         orderBy: "RATING_AVERAGE",
         orderDirection: "ASC",
       })}
+      style={{ color: "black" }}
     ></Picker.Item>
   </Picker>
 );
@@ -48,6 +58,9 @@ const RepositoryList = () => {
   const [order, setOrder] = useState(
     JSON.stringify({ orderBy: "CREATED_AT", orderDirection: "DESC" })
   );
+
+  const [search, setSearch] = useState("");
+  const [searchDebounce] = useDebounce(search, 500);
 
   const changeOrder = (itemValue) => {
     setOrder(itemValue);
@@ -61,6 +74,7 @@ const RepositoryList = () => {
     variables: {
       orderBy: `${JSON.parse(order).orderBy}`,
       orderDirection: `${JSON.parse(order).orderDirection}`,
+      searchKeyword: searchDebounce,
     },
     fetchPolicy: "cache-and-network",
   });
@@ -78,11 +92,20 @@ const RepositoryList = () => {
         </Pressable>
       )}
       ListHeaderComponent={
-        <SortPicker
-          selectedValue={order}
-          onValueChange={changeOrder}
-          placeholder={{ label: "select.." }}
-        />
+        <>
+          <TextInput
+            placeholder="Search"
+            style={styles.searchBar}
+            value={search}
+            onChangeText={(text) => setSearch(text)}
+          />
+          <SortPicker
+            selectedValue={order}
+            onValueChange={changeOrder}
+            placeholder={{ label: "select.." }}
+            selectionColor={"black"}
+          />
+        </>
       }
     />
   );
