@@ -49,7 +49,7 @@ export const SignUpContainer = ({ onSubmit }) => {
           style={formStyles.buttonContainer}
         >
           <Text color={"textSecondary"} style={{ textAlign: "center" }}>
-            Sign In
+            Sign Up
           </Text>
         </Pressable>
       </View>
