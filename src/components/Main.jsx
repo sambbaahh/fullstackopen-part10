@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Route, Routes, Navigate } from "react-router-native";
 
 import RepositoryList from "./RepostitoryList";
@@ -8,14 +8,7 @@ import SingleRepository from "./SingleRepository";
 import ReviewForm from "./ReviewForm";
 import SignUp from "./SignUp";
 import MyReviews from "./MyReviews";
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    flexShrink: 1,
-    backgroundColor: "#e1e4e8",
-  },
-});
+import styles from "../styles/main";
 
 const Main = () => {
   return (

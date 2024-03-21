@@ -1,26 +1,11 @@
-import { View, StyleSheet, ScrollView } from "react-native";
-import Constants from "expo-constants";
+import { View, ScrollView } from "react-native";
 import { Link } from "react-router-native";
 import { useQuery } from "@apollo/client";
 
 import Text from "./Text";
 import { GET_CURRENT_USER } from "../graphql/queries";
 import useAuth from "../hooks/useAuth";
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#24292e",
-  },
-  scrollView: {
-    display: "flex",
-    flexDirection: "row",
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    gap: 20,
-    flexGrow: 1,
-  },
-});
+import styles from "../styles/appBar";
 
 const AppBarTab = (props) => (
   <Link to={props.route} onPress={props.onPress}>

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Pressable, TextInput } from "react-native";
+import { FlatList, Pressable, TextInput } from "react-native";
 import { useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-native";
 import { useState } from "react";
@@ -8,15 +8,7 @@ import RepositoryItem from "./RepositoryItem";
 import { GET_REPOSITORIES } from "../graphql/queries";
 import { Picker } from "@react-native-picker/picker";
 import { ItemSeparator } from "./ItemSeparator";
-
-export const styles = StyleSheet.create({
-  searchBar: {
-    backgroundColor: "white",
-    height: 50,
-    padding: 10,
-    margin: 10,
-  },
-});
+import styles from "../styles/repositoryList";
 
 const SortPicker = (props) => (
   <Picker {...props}>
